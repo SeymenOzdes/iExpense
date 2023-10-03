@@ -17,4 +17,15 @@ class Expenses: ObservableObject {
             }
         }
     }
+    init() {
+        let decoder = JSONDecoder()
+        
+        if let savedİtems = UserDefaults.standard.data(forKey: "Items") {
+            if let decodedItems = try? decoder.decode([ExpenseItem].self, from: savedİtems) {
+                items = decodedItems
+                return
+            }
+        }
+        items = []
+    }
 }
